@@ -15,7 +15,7 @@ scene.add(camera);
 
 //3. Create add the object
 const geometry = new THREE.DodecahedronGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x468585 , emissive: 0x468585});
+const material = new THREE.MeshLambertMaterial({ color: 0x468585 , emissive: 0x468585});
 const dodecahedron = new THREE.Mesh(geometry, material);
 
 
@@ -55,5 +55,12 @@ function animate () {
   // controls.update();
   render.render(scene, camera);
 }
+
+//8. Handle window resizing
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  render.setSize(window.innerWidth, window.innerHeight);
+});
 
 animate();
