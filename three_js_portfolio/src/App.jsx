@@ -1,9 +1,9 @@
 import React from 'react'
-
+import NavBar from './components/NavBar'
 const App = () => {
   return (
     <main className='max-w-7xl mx-auto'>
-      <h1 className='text-white text-2xl'>Hello Three js</h1>
+      <NavBar/>
     </main>
   )
 }
