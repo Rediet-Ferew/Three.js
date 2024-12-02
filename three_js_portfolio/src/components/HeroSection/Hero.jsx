@@ -6,8 +6,28 @@ import { PerspectiveCamera } from '@react-three/drei'
 import { Suspense } from 'react'
 import ComputerDesk from '../three_components/ComputerDesk'
 import CanvasLoader from '../Layout/CanvasLoader'
+import { Leva, useControls } from 'leva';
+import {useMediaQuery} from 'react-responsive';
+import Target from '../three_components/Target'
+import CuteRobot from '../three_components/CuteRobot'
 
 const Hero = () => {
+  const isMobile = useMediaQuery({maxWidth: 768});
+  const isTablet = useMediaQuery({minWidth: 768, maxWidth: 1024});
+  const isSmall = useMediaQuery({maxWidth: 440});
+
+  const calculateSizes = (isSmall, isMobile, isTablet) => {
+    return {
+      deskScale: isSmall ? 0.05 : isMobile ? 0.06 : 0.07,
+      deskPosition: isMobile ? [0.5, -4.5, 0] : [0.4, -6.0, 0],
+      cubePosition: isSmall ? [4, -5, 0] : isMobile ? [5, -5, 0] : isTablet ? [5, -5, 0] : [9, -5.5, 0],
+      reactLogoPosition: isSmall ? [3, 4, 0] : isMobile ? [5, 4, 0] : isTablet ? [5, 4, 0] : [12, 3, 0],
+      ringPosition: isSmall ? [-5, 7, 0] : isMobile ? [-10, 10, 0] : isTablet ? [-12, 10, 0] : [-24, 10, 0],
+      targetPosition: isSmall ? [-5, -10, -10] : isMobile ? [-9, -10, -10] : isTablet ? [-11, -7, -10] : [-13, -13, -10],
+    };
+  };
+  const sizes = calculateSizes(isMobile, isTablet, isSmall);
+ 
   return (
     <div>
         <section className="min-h-screen w-full flex flex-col relative">
@@ -15,23 +35,28 @@ const Hero = () => {
               <p className='sm:text-3xl text-2xl font-medium text-white text-center font-generalsans'>I'm Rediet Ferew <span className='waving-hand'>👋</span><Typing/></p>
                 
                 <div className='w-full h-full absolute inset-0'>
-                  
+                
                   <Canvas className='w-full h-full'>
                     <Suspense fallback={<CanvasLoader/>}>
+                    <PerspectiveCamera makeDefault position={[0, 0, 20]} />
 
+                    <HackerRoom 
                     
-                    <PerspectiveCamera makeDefault position={[0, 0, 30]} />
-
-                    <HackerRoom scale={0.05} position={[0, 0, 0]} rotation={[0, -Math.PI / 2, 0]}/>
-
+                    position={sizes.deskPosition}
+                    rotation={[0, -Math.PI, 0]}
+                    scale={sizes.deskScale}
                     
+                    />
+
+                    <group>
+                      <Target /> 
+                      <CuteRobot position={sizes.reactLogoPosition}/>                     
+                    </group>
 
                     <ambientLight intensity={1}/>
                     <directionalLight position={[10, 10, 10]} intensity={0.5}/>
                     </Suspense>
                   </Canvas>
-                  
-    
                 </div>
             </div>
             
