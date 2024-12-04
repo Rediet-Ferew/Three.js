@@ -10,19 +10,27 @@ import { Leva, useControls } from 'leva';
 import {useMediaQuery} from 'react-responsive';
 import Target from '../three_components/Target'
 import CuteRobot from '../three_components/CuteRobot'
+import HexSphere from '../three_components/HexSphere'
+import Python from '../three_components/Python'
+import ReactLogo from '../three_components/ReactLogo'
+import Web from '../three_components/Web'
 
 const Hero = () => {
   const isMobile = useMediaQuery({maxWidth: 768});
   const isTablet = useMediaQuery({minWidth: 768, maxWidth: 1024});
-  const isSmall = useMediaQuery({maxWidth: 440});
+  const isSmall = useMediaQuery({maxWidth: 440}
+    );
+
+    
 
   const calculateSizes = (isSmall, isMobile, isTablet) => {
     return {
       deskScale: isSmall ? 0.05 : isMobile ? 0.06 : 0.07,
       deskPosition: isMobile ? [0.5, -4.5, 0] : [0.4, -6.0, 0],
-      cubePosition: isSmall ? [4, -5, 0] : isMobile ? [5, -5, 0] : isTablet ? [5, -5, 0] : [9, -5.5, 0],
-      reactLogoPosition: isSmall ? [3, 4, 0] : isMobile ? [5, 4, 0] : isTablet ? [5, 4, 0] : [12, 3, 0],
-      ringPosition: isSmall ? [-5, 7, 0] : isMobile ? [-10, 10, 0] : isTablet ? [-12, 10, 0] : [-24, 10, 0],
+      cubePosition: isSmall ? [-4, -5, 0] : isMobile ? [-5, -5, 0] : isTablet ? [-5, -5, 0] : [-9, -5.5, 0],
+      webPosition: isSmall ? [4, -5, 0] : isMobile ? [5, -5, 0] : isTablet ? [5, -5, 0] : [9, -5.5, 0],
+      reactLogoPosition: isSmall ? [3, 4, 0] : isMobile ? [5, 4, 0] : isTablet ? [16, 4, 0] : [11, 3, 0],
+      ringPosition: isSmall ? [-5, 7, 0] : isMobile ? [-10, 10, 0] : isTablet ? [-12, 10, 0] : [-12, 2, 0],
       targetPosition: isSmall ? [-5, -10, -10] : isMobile ? [-9, -10, -10] : isTablet ? [-11, -7, -10] : [-13, -13, -10],
     };
   };
@@ -49,8 +57,11 @@ const Hero = () => {
                     />
 
                     <group>
-                      <Target /> 
-                      <CuteRobot position={sizes.reactLogoPosition}/>                     
+
+                      <CuteRobot position={sizes.reactLogoPosition}/>  
+                      <HexSphere position={sizes.cubePosition}/>  
+                      <ReactLogo position ={sizes.ringPosition}/>
+                      <Web position={sizes.webPosition}/>
                     </group>
 
                     <ambientLight intensity={1}/>
