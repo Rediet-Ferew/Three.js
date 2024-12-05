@@ -7,7 +7,7 @@ const HexSphere = (props) => {
   const { nodes, materials } = useGLTF('hex_sphere/scene.gltf')
   return (
     <Float floatIntensity={1}>
-      <group {...props}  rotation={[-Math.PI / 2, 0, 0]} scale={1.5}>
+      <group {...props}  rotation={[-Math.PI / 2, 0, 0]} scale={1.1}>
         <mesh
           castShadow
           receiveShadow

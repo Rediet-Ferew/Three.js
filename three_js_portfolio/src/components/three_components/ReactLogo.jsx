@@ -1,13 +1,13 @@
 
 
 import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, Float } from '@react-three/drei'
 
 const ReactLogo = (props) => {
   const { nodes, materials } = useGLTF('react/scene.gltf')
   return (
-    <group {...props} dispose={null}>
-      <group scale={0.01}>
+    <Float>
+      <group {...props} scale={0.007}>
         <mesh
           castShadow
           receiveShadow
@@ -18,7 +18,7 @@ const ReactLogo = (props) => {
           scale={[39.166, 39.166, 52.734]}
         />
       </group>
-    </group>
+    </Float>
   )
 }
 
